@@ -1,0 +1,117 @@
+loot layer = 15
+GET_POSITION 0x809BA0
+one param BoneTransform->m_transform
+typedef DWORD64(__cdecl* Transform_GetPositiom)(void* Transform, D3DXVECTOR3 &pos);
+ 
+enum bones
+{
+HumanHead=133,
+HumanNeck =132,
+HumanSpine3 = 37,
+HumanSpine2 = 36,
+HumanSpine1 = 29,
+HumanPelvis = 14,
+HumanLCalf = 17,
+HumanLFoot = 18,
+HumanRCalf = 22,
+HumanRFoot = 23,
+HumanLForearm2 = 92,
+HumanLForearm1 = 91,
+HumanLUpperarm = 90,
+HumanRForearm2 = 113,
+HumanRForearm1 = 112,
+HumanRUpperarm=111,
+};
+ 
+class MovementContext
+{
+public:
+char pad_0x0000[0x1A0]; //0x0000 //0x188 old
+D3DXVECTOR2 ViewAngle; //0x1A0
+}
+ 
+class Profile
+{
+public:
+char pad_0x0000[0x10]; //0x0000
+UnicodeString* ID; //0x0010 
+UnicodeString* AccountId; //0x0018
+DWORD64 IsPlayer;//0x20
+Info* m_info; //0x0028
+}
+ 
+class Info
+{
+public:
+char pad_0x0000[0x10]; //0x0000
+UnicodeString* m_name; //0x0010 
+char pad_0x0018[0x428]; //0x0018
+ 
+};//Size=0x044
+ 
+class PlayerBody
+{
+public:
+char pad_0x0000[0x18]; //0x0000
+__int64 Transform; //0x0018 
+PlayerBones* PlayerBones; //0x0020 
+Skeleton* SkeletonRootJoint; //0x0028 
+Skeleton* SkeletonHands; //0x0030 
+char pad_0x0038[0x38]; //0x0038
+Slot* N000020D4; //0x0070 
+UnityArray* m_WeaponsArray; //0x0078
+}
+ 
+class Skeleton
+{
+public:
+char pad_0x0000[0x18]; //0x0000
+Dictionary* Bones; //0x0018 
+char pad_0x0028[0x10]; //0x0020
+DWORD64* Enumerator; //0x0028
+ 
+};
+ 
+class BoneTransform
+{
+public:
+char pad_0x0000[0x10]; //0x0000
+Transform* m_transform;
+ 
+};
+ 
+class Transform
+{
+public:
+char pad_0x0000[0x38]; //0x0000
+TransformChild* m_child; //0x0038
+int m_transform_index;//0x40
+ 
+};
+ 
+class TransformChild
+{
+public:
+char pad_0x0000[0x90]; //0x0000 //0x90 old
+D3DXVECTOR3 position; //0x0090 
+}
+ 
+class ProceduralWeaponAnimation
+{
+public:
+char pad_0x0000[0x18]; //0x0000
+__int64 HealthController; //0x0018 
+PlayerSpring* HandsContainer; //0x0020 
+__int64 CameraContainer; //0x0028 
+BteathEffector* Breath; //0x0030 
+WalkEffector* Walk; //0x0038 
+MotionEffector* MotionReact; //0x0040 
+ForceEffector* ForceReact; //0x0048 
+ShotEffector* Shoting; //0x0050 
+TurnAwayEffector* TurnAway; //0x0058 
+CustomEffector* mCustomEffector; //0x0060 
+char pad_0x0068[0x10]; //0x0068
+__int64 ScopeAimTransforms; //0x0078 
+char pad_0x0080[0x20]; //0x0080
+float CameraSmoothTime; //0x00A0 
+}
